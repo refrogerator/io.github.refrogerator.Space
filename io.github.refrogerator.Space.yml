@@ -1,0 +1,30 @@
+id: io.github.refrogerator.Space
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: space
+finish-args:
+  - --filesystem=home
+  - --socket=wayland
+  - --socket=x11
+  - --device=dri
+  - --socket=pulseaudio
+modules:
+  - name: space
+    buildsystem: simple
+    build-commands:
+      - source /usr/lib/sdk/rust-stable/enable.sh && cargo build --release
+      - install -Dm777 target/release/space /app/bin/space
+      - install -Dm644 res/Space.desktop /app/share/applications/io.github.refrogerator.Space.desktop
+      - mkdir -p /app/share/space
+      - cp -r res /app/share/space/
+    build-options:
+      build-args:
+        - --share=network
+    sources:
+      - type: git
+        url: https://github.com/refrogerator/space
+        tag: 0.0.2
+        commit: 26e446a5b84a606bd451054eafce668327228416
