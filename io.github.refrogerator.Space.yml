@@ -18,6 +18,7 @@ modules:
       - source /usr/lib/sdk/rust-stable/enable.sh && cargo build --release
       - install -Dm777 target/release/space /app/bin/space
       - install -Dm644 res/Space.desktop /app/share/applications/io.github.refrogerator.Space.desktop
+      - install -Dm644 res/io.github.refrogerator.Space.svg /app/share/icons/hicolor/scalable/io.github.refrogerator.Space.svg
       - mkdir -p /app/share/space
       - cp -r res /app/share/space/
     build-options:
@@ -26,5 +27,4 @@ modules:
     sources:
       - type: git
         url: https://github.com/refrogerator/space
-        tag: 0.0.2
-        commit: 26e446a5b84a606bd451054eafce668327228416
+        branch: main
